@@ -7,7 +7,7 @@ const quizData = [
         correct: "a",
     },
     {
-        question: "WWhat is the freezing point of water?",
+        question: "What is the freezing point of water?",
         a: "0",
         b: "-5",
         c: "6",
@@ -50,6 +50,8 @@ const a_text = document.getElementById('a_text');
 const b_text = document.getElementById('b_text');
 const c_text = document.getElementById('c_text');
 const submit = document.getElementById('submit');
+const counterElement = document.getElementById('counter');
+
 
 let currentQuiz = 0;
 let score = 0;
@@ -58,7 +60,7 @@ loadQuiz();
 
 function loadQuiz(){
     deselectAnswers();
-
+    
     const currentQuizData = quizData[currentQuiz];
 
     questionElement.innerText = currentQuizData.question;
@@ -67,10 +69,11 @@ function loadQuiz(){
     c_text.innerText = currentQuizData.c;
 }
 
-function deselectAnswers(){
-    answerElements.forEach(answerEl => answerEl.checked = false)
-}
-
+function deselectAnswers() {
+    answerElements.forEach(function(answerEl) {
+      answerEl.checked = false;
+    });
+  };
 function getSelected(){
     let answer;
 
@@ -90,16 +93,20 @@ submit.addEventListener('click', () => {
         if(answer === quizData[currentQuiz].correct){
             score++;
         }
-
+        
         currentQuiz++;
-
+        
+        
         if(currentQuiz < quizData.length){
             loadQuiz();
         }
         else{
-            quiz.innerHTML = `<h2>You answered coreectly at ${score}/${quizData.length} questions</h2>
-            <button onclick="location.reload()">Reload</button>
+            currentQuiz--;
+            quiz.innerHTML = `<h2 class="after_quiz">You answered coreectly at ${score}/${quizData.length} questions</h2>
+            <img clas="gif" src="1.gif">
+            <button class="quiz-button" onclick="location.reload()">Reload</button>
             `;
         }
+        counterElement.textContent = currentQuiz + 1;
     }
 });

@@ -1,0 +1,154 @@
+body{
+    background-image: url("fon.jpg");
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+.numb{
+    background-color: #ff0000; 
+    border-radius: 10px; /* Закругленные углы */
+    width: 10%; /* Ширина блока */
+    height: 80px; /* Высота блока */
+    opacity: 0.8;
+    text-align: center;
+}
+
+.text {
+    display: inline-block; /* Расположение в одну строку */
+    color: white; /* Белый цвет шрифта */
+    font-family: "Obelix Pro", sans-serif; /* Шрифт Obelix Pro */
+    font-size: 200%;
+    margin-bottom: 10px; /* Задаем отступ снизу */
+  }
+  
+  #counter {
+    display: inline-block; /* Расположение в одну строку */
+    color: white; /* Белый цвет шрифта */
+    font-family: "Obelix Pro", sans-serif; /* Шрифт Obelix Pro */
+    font-size: 200%;
+  }
+.quiz-box {
+    background-color: #00bfff; /* Голубой фон */
+    border-radius: 10px; /* Закругленные углы */
+    width: 30%; /* Ширина блока */
+    height: 400px; /* Высота блока */
+    position: absolute; /* Абсолютное позиционирование */
+    top: 50%; /* Положение блока по вертикали */
+    left: 50%; /* Положение блока по горизонтали */
+    transform: translate(-50%, -50%); /* Сдвиг блока на 50% от его размера */
+    opacity: 0.9;
+    
+  }
+
+  #question{
+    text-align: center; /* Выравнивание текста по центру */
+    color: white; /* Белый цвет шрифта */
+    font-family: "Obelix Pro", sans-serif; /* Шрифт Obelix Pro */
+    font-size: 200%;
+  }
+
+  #submit{
+    position: absolute; /* Абсолютное позиционирование */
+    top: 90%; /* Положение блока по вертикали */
+    left: 50%; /* Положение блока по горизонтали */
+    transform: translate(-50%, -50%); /* Сдвиг блока на 50% от его размера */
+    width: 30%; /* Ширина блока */
+    height: 40px; /* Высота блока */
+    border-radius: 10px; /* Закругленные углы */
+    font-family: "Obelix Pro", sans-serif;
+    font-size: 140%;
+    background-color: #eef14c; /* Светло-голубой фон кнопки */
+    color: rgb(0, 0, 0); /* Белый цвет текста */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border: none; /* Убираем границу кнопки */
+    border-radius: 5px; /* Закругленные углы кнопки */
+    transition: background-color 0.3s, color 0.3s; /* Плавное изменение цвета при наведении */
+    
+}
+
+#submit:hover {
+  background-color: #87cefa; /* Новый цвет фона при наведении (светло-голубой) */
+  color: white; /* Новый цвет текста при наведении (белый) */
+}
+
+#submit:active {
+  background-color: #00008b; /* Новый цвет фона при нажатии (темно-синий) */
+  color: white; /* Новый цвет текста при нажатии (белый) */
+}
+
+ul{
+    top: 90%; /* Положение блока по вертикали */
+    left: 50%;
+    
+    color: white; /* Белый цвет шрифта */
+    font-family: "Obelix Pro", sans-serif; /* Шрифт Obelix Pro */
+    font-size: 150%;
+    display: grid; /* Устанавливаем контейнер как контейнер сетки */
+    margin: 40px; /* Сбросить внешние отступы списка */
+    padding: 0; /* Сбросить внутренние отступы списка */
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 40px;
+    list-style-type: disc;
+    font-size: 30px;
+    list-style-type: none; /* Убираем стандартные маркеры пунктов списка */
+    position: relative; /* Устанавливаем позиционирование для создания стрелки */
+    padding-left: 20px; /* Добавляем отступ слева для размещения стрелки */
+    
+  }
+  
+  .custom-option {
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .custom-option:hover {
+    background-color: lightblue;
+  }
+
+.after_quiz{
+    text-align: center; /* Выравнивание текста по центру */
+    color: white; /* Белый цвет шрифта */
+    font-family: "Obelix Pro", sans-serif; /* Шрифт Obelix Pro */
+    font-size: 200%;
+}
+
+.quiz-button{
+    position: absolute; /* Абсолютное позиционирование */
+    top: 90%; /* Положение блока по вертикали */
+    left: 50%; /* Положение блока по горизонтали */
+    transform: translate(-50%, -50%); /* Сдвиг блока на 50% от его размера */
+    width: 30%; /* Ширина блока */
+    height: 40px; /* Высота блока */
+    border-radius: 10px; /* Закругленные углы */
+    font-family: "Obelix Pro", sans-serif;
+    font-size: 100%;
+    background-color: #eef14c; /* Светло-голубой фон кнопки */
+    color: rgb(0, 0, 0); /* Белый цвет текста */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border: none; /* Убираем границу кнопки */
+    border-radius: 5px; /* Закругленные углы кнопки */
+    transition: background-color 0.3s, color 0.3s; /* Плавное изменение цвета при наведении */
+}
+
+.quiz-button:hover {
+    background-color: #87cefa; /* Новый цвет фона при наведении (светло-голубой) */
+    color: white; /* Новый цвет текста при наведении (белый) */
+  }
+  
+  .quiz-button:active {
+    background-color: #00008b; /* Новый цвет фона при нажатии (темно-синий) */
+    color: white; /* Новый цвет текста при нажатии (белый) */
+  }
+
+  .gif{
+    top: 90%; /* Положение блока по вертикали */
+    left: 50%;
+    display: grid; /* Устанавливаем контейнер как контейнер сетки */
+    margin: 40px; /* Сбросить внешние отступы списка */
+    padding: 0; /* Сбросить внутренние отступы списка */
+  }
+  

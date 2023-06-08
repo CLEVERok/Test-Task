@@ -9,26 +9,31 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-            
+    <div class="numb">
+        <h1 class="text">Task :</h1>
+        <span id="counter"> 1</span> 
+    </div>
+           
     <div class="quiz-box" id="quiz">
         <div class="quiz-header">
             <h2 id="question">Question text</h2>
             <ul>
-                <li>
+                <li class="custom-option">
                     <input type="radio" name="answer" id="a" class="answer">
                     <label for="a" id="a_text">Question</label>
                 </li>
-                <li>
+                <li class="custom-option">
                     <input type="radio" name="answer" id="b" class="answer">
                     <label for="b" id="b_text">Question</label>
                 </li>
-                <li>
+                <li class="custom-option">
                     <input type="radio" name="answer" id="c" class="answer">
                     <label for="c" id="c_text">Question</label>
                 </li>
             </ul>
         </div>
         <button id="submit">Submit</button>
+        
     </div>
     <script src="index.js"></script>
 </body>
