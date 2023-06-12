@@ -46,9 +46,9 @@ const quizData = [
 const quiz = document.getElementById('quiz');
 const answerElements = document.querySelectorAll('.answer');
 const questionElement = document.getElementById('question');
-const a_text = document.getElementById('a_text');
-const b_text = document.getElementById('b_text');
-const c_text = document.getElementById('c_text');
+const a_answer = document.getElementById('a_answer');
+const b_answer = document.getElementById('b_answer');
+const c_answer = document.getElementById('c_answer');
 const submit = document.getElementById('submit');
 const counterElement = document.getElementById('counter');
 
@@ -64,9 +64,9 @@ function loadQuiz(){
     const currentQuizData = quizData[currentQuiz];
 
     questionElement.innerText = currentQuizData.question;
-    a_text.innerText = currentQuizData.a;
-    b_text.innerText = currentQuizData.b;
-    c_text.innerText = currentQuizData.c;
+    a_answer.innerText = currentQuizData.a;
+    b_answer.innerText = currentQuizData.b;
+    c_answer.innerText = currentQuizData.c;
 }
 
 function deselectAnswers() {
@@ -103,7 +103,7 @@ submit.addEventListener('click', () => {
         else{
             currentQuiz--;
             quiz.innerHTML = `<h2 class="after_quiz">You answered coreectly at ${score}/${quizData.length} questions</h2>
-            <img clas="gif" src="1.gif">
+            <img clas="gif" src="assets/final_test_korgi.gif">
             <button class="quiz-button" onclick="location.reload()">Reload</button>
             `;
         }
