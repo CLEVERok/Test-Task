@@ -85,6 +85,49 @@ function getSelected(){
 
     return answer;
 }
+//-----------------------------------------------------------------------------------Timer start--------------------------------------------
+var intervalId; 
+
+    function startTimer(duration, callback) {
+      var timerElement = document.getElementById('timer');
+
+      intervalId = setInterval(function() {
+        var minutes = Math.floor(duration / 60);
+        var seconds = duration % 60;
+
+        var timeString = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+        timerElement.textContent = timeString;
+
+        if (duration <= 0) {
+          clearInterval(intervalId);
+          callback();
+        }
+
+        duration--;
+      }, 1000);
+    }
+
+    function timerCallback() {
+      location.reload();
+    }
+
+    function restartTimer() {
+      clearInterval(intervalId); 
+      var duration = 10; 
+      startTimer(duration, timerCallback);
+    }
+
+    window.onload = function() {
+      var duration = 10; 
+      startTimer(duration, timerCallback);
+    };
+
+    function stopTimer() {
+        var timerElement = document.getElementById('timer');
+      timerElement.textContent = '';
+        clearInterval(intervalId);
+      }
+//-----------------------------------------------------------------------------------Timer end--------------------------------------------
 
 submit.addEventListener('click', () => {
     const answer = getSelected();
@@ -92,6 +135,7 @@ submit.addEventListener('click', () => {
     if(answer){
         if(answer === quizData[currentQuiz].correct){
             score++;
+            restartTimer();
         }
         
         currentQuiz++;
@@ -101,6 +145,7 @@ submit.addEventListener('click', () => {
             loadQuiz();
         }
         else{
+            stopTimer()
             currentQuiz--;
             quiz.innerHTML = `<h2 class="after_quiz">You answered coreectly at ${score}/${quizData.length} questions</h2>
             <img clas="gif" src="assets/final_test_korgi.gif">
