@@ -127,8 +127,47 @@ var intervalId;
       timerElement.textContent = '';
         clearInterval(intervalId);
       }
-//-----------------------------------------------------------------------------------Timer end--------------------------------------------
+//----------------------------------------------------------local storage start---------------
+function saveScore() {
+  
+  var currentDate = new Date();
+  var scoreValue = score;
 
+  var newScore = {
+      score: scoreValue,
+      date: currentDate.toLocaleString()
+  };
+
+  var savedScores = localStorage.getItem("scores");
+  if (savedScores) {
+      savedScores = JSON.parse(savedScores);
+      savedScores.push(newScore); 
+      if (savedScores.length > 5) {
+          savedScores = savedScores.slice(-5); 
+      }
+  } else {
+      savedScores = [newScore]; 
+  }
+
+  
+  localStorage.setItem("scores", JSON.stringify(savedScores));
+
+ 
+  displayScores(savedScores);
+}
+
+
+function displayScores(scores) {
+  var scoreList = document.getElementById("scoreList");
+  scoreList.innerHTML = "";
+
+  scores.forEach(function(score) {
+      var listItem = document.createElement("li");
+      listItem.innerText = score.score + " - " + score.date;
+      scoreList.appendChild(listItem);
+  });
+}
+//----------------------------------------------------------local storage end---------------
 submit.addEventListener('click', () => {
     const answer = getSelected();
 
@@ -146,7 +185,13 @@ submit.addEventListener('click', () => {
         }
         else{
             stopTimer()
+            saveScore()
             currentQuiz--;
+            var savedScores = localStorage.getItem("scores");
+        if (savedScores) {
+            savedScores = JSON.parse(savedScores);
+            displayScores(savedScores);
+        }
             quiz.innerHTML = `<h2 class="after_quiz">You answered coreectly at ${score}/${quizData.length} questions</h2>
             <img clas="gif" src="assets/final_test_korgi.gif">
             <button class="quiz-button" onclick="location.reload()">Reload</button>
