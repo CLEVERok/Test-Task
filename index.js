@@ -170,11 +170,10 @@ function displayScores(scores) {
 //----------------------------------------------------------local storage end---------------
 submit.addEventListener('click', () => {
     const answer = getSelected();
-
+    restartTimer();
     if(answer){
         if(answer === quizData[currentQuiz].correct){
             score++;
-            restartTimer();
         }
         
         currentQuiz++;

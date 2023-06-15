@@ -56,9 +56,38 @@ body{
 
 
 /*---------------------------------Score------------------------------------*/
-#scoreList{
-  color: rgb(0, 0, 0);  
+
+.score{
+  background-color: hsl(52, 98%, 48%); 
+  border-radius: 10px; 
+  width: 20%; 
+  height: 250px; 
+  opacity: 0.8;
+  margin-bottom: 20px;
 }
+
+#scoreList{
+  display: inline-block; 
+  color: rgb(0, 0, 0); 
+  font-family: "roboto", 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  line-height: 0.1;
+  font-size: 10px;
+}
+.score ul li {
+  font-size: 25px; 
+}
+
+.corgi{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.corgi img{
+  max-width: 65%;
+  max-height: 80%;
+}
+
 
 /*-------------------------------------------------------------------------*/
 .quiz-box {
