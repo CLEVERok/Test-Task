@@ -85,17 +85,49 @@ function getSelected(){
 
     return answer;
 }
+//----------------------------------------------------theme start------------------------------------------------------------------------------
+const changeBackgroundBtn = document.getElementById("changeBackgroundBtn");
+const originalBackgroundImage = 'url("assets/fon.jpg")';
+const newBackgroundImage = 'url("assets/fon2.jpg")';
+const originalTimerBlockColor = '#3cff00';
+const originalNumbColor = '#ff0000';
+
+changeBackgroundBtn.addEventListener("click", function() {
+            const body = document.body;
+            const currentBackgroundImage = body.style.backgroundImage;
+            const timerBlocks = document.getElementsByClassName("timer_block");
+            const numbs = document.getElementsByClassName("numb");
+
+            if (currentBackgroundImage === newBackgroundImage) {
+                body.style.backgroundImage = originalBackgroundImage;
+                for (let i = 0; i < timerBlocks.length; i++) {
+                    timerBlocks[i].style.backgroundColor = originalTimerBlockColor;
+                }
+                for (let j = 0; j < numbs.length; j++) {
+                    numbs[j].style.backgroundColor = originalNumbColor;
+                }
+            } else {
+                body.style.backgroundImage = newBackgroundImage;
+                for (let k = 0; k < timerBlocks.length; k++) {
+                    timerBlocks[k].style.backgroundColor = '#00bfff';
+                }
+                for (let l = 0; l < numbs.length; l++) {
+                    numbs[l].style.backgroundColor = '#00bfff';
+                }
+            }
+        });
 //-----------------------------------------------------------------------------------Timer start--------------------------------------------
-var intervalId; 
+let intervalId; 
+let duration = 10;
 
     function startTimer(duration, callback) {
-      var timerElement = document.getElementById('timer');
+      const timerElement = document.getElementById('timer');
 
       intervalId = setInterval(function() {
-        var minutes = Math.floor(duration / 60);
-        var seconds = duration % 60;
+        let minutes = Math.floor(duration / 60);
+        let seconds = duration % 60;
 
-        var timeString = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+        let timeString = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
         timerElement.textContent = timeString;
 
         if (duration <= 0) {
@@ -108,17 +140,23 @@ var intervalId;
     }
 
     function timerCallback() {
-      location.reload();
+        var result = confirm("Time over");
+        if (result == true) {
+            duration = 0; 
+        }
+        else{
+            location.reload();
+        }
     }
 
     function restartTimer() {
-      clearInterval(intervalId); 
-      var duration = 10; 
+      clearInterval(intervalId);
+      duration = 10;
       startTimer(duration, timerCallback);
+      
     }
 
     window.onload = function() {
-      var duration = 10; 
       startTimer(duration, timerCallback);
     };
 
@@ -170,14 +208,22 @@ function displayScores(scores) {
 //----------------------------------------------------------local storage end---------------
 submit.addEventListener('click', () => {
     const answer = getSelected();
-    restartTimer();
+    
     if(answer){
-        if(answer === quizData[currentQuiz].correct){
-            score++;
-        }
+        
+            if(answer === quizData[currentQuiz].correct){
+            if(duration <= 0){
+                score = score;
+            }
+            else{
+                score++;
+            }
+            }   
+        
         
         currentQuiz++;
-        
+
+        restartTimer();
         
         if(currentQuiz < quizData.length){
             loadQuiz();

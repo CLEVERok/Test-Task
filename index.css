@@ -90,6 +90,12 @@ body{
 
 
 /*-------------------------------------------------------------------------*/
+
+
+
+
+
+
 .quiz-box {
     background-color: #00bfff; 
     border-radius: 10px; 
@@ -109,31 +115,35 @@ body{
     font-family: "Obelix Pro", sans-serif;  
     font-size: 200%;
   }
-
-  #submit{
-    position: absolute;  
-    top: 90%;  
-    left: 50%; 
-    transform: translate(-50%, -50%);  
-    width: 30%;  
-    height: 40px;  
-    border-radius: 10px;  
-    font-family: "Obelix Pro", sans-serif;
-    font-size: 140%;
-    background-color: #eef14c;  
-    color: rgb(0, 0, 0);  
-    padding: 10px 20px;  
-    border: none;  
-    border-radius: 5px;  
-    transition: background-color 0.3s, color 0.3s;  
-    
+  /*----------------------------------butons-------------------------------------------*/
+  .button-container {
+    position: fixed;
+    top: 350px;
+    left: 20px;
 }
 
+.button-container button {
+    padding: 10px 107px;
+    font-size: 19px;
+    background-color: #fbff00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Obelix Pro", sans-serif;  
+}
+ 
+#changeBackgroundBtn:hover{
+  background-color: #87cefa;  
+  color: white;  
+}
 #submit:hover {
   background-color: #87cefa;  
   color: white;  
 }
-
+#changeBackgroundBtn:active{
+  background-color: #00008b;  
+  color: white;  
+}
 #submit:active {
   background-color: #00008b;  
   color: white;  
@@ -180,6 +190,8 @@ li {
     font-family: "Obelix Pro", sans-serif;  
     font-size: 200%;
 }
+
+
 
 .quiz-button{
     position: absolute;  
@@ -238,3 +250,4 @@ li {
     font-weight: bold;
     color: black;
   }
+
