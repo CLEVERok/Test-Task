@@ -61,7 +61,7 @@ body{
   background-color: hsl(52, 98%, 48%); 
   border-radius: 10px; 
   width: 20%; 
-  height: 250px; 
+  height: 620px; 
   opacity: 0.8;
   margin-bottom: 20px;
 }
@@ -70,7 +70,7 @@ body{
   display: inline-block; 
   color: rgb(0, 0, 0); 
   font-family: "roboto", 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  line-height: 0.1;
+  line-height: 0.8;
   font-size: 10px;
 }
 .score ul li {
@@ -84,18 +84,12 @@ body{
 }
 
 .corgi img{
-  max-width: 65%;
-  max-height: 80%;
+  max-width: 120%;
+  max-height: 120%;
 }
 
 
 /*-------------------------------------------------------------------------*/
-
-
-
-
-
-
 .quiz-box {
     background-color: #00bfff; 
     border-radius: 10px; 
@@ -225,7 +219,7 @@ li {
     top: 90%;  
     left: 50%;
     display: grid;  
-    margin: 40px;  
+    margin: 20px;  
     padding: 0;  
   }
   
@@ -250,4 +244,63 @@ li {
     font-weight: bold;
     color: black;
   }
+
+
+@media only screen and (max-width: 800px) {
+  .numb,
+  .timer_block,
+  .score {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  .score {
+    margin-top: 20px;
+  }
+  .quiz-box {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    position: static;
+    margin: 0 auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .button-container {
+        top: auto;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        position: relative;
+       
+    }
+
+  
+  .button-container button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px; 
+    margin-bottom: 8px
+  }
+
+  .quiz-button{
+    width: 100%;
+    padding: 10px;
+    font-size: 16px; 
+    top: auto;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        position: relative;
+  }
+
+}
+
+
 

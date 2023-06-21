@@ -51,16 +51,26 @@ const b_answer = document.getElementById('b_answer');
 const c_answer = document.getElementById('c_answer');
 const submit = document.getElementById('submit');
 const counterElement = document.getElementById('counter');
-
+const scoreList = document.getElementById('scoreList');
 
 let currentQuiz = 0;
 let score = 0;
 
 loadQuiz();
 
-function loadQuiz(){
+function loadQuiz() {
     deselectAnswers();
-    
+
+    if (currentQuiz >= quizData.length) {
+        stopTimer();
+        saveScore();
+        displayScores();
+        quiz.innerHTML = `<h2 class="after_quiz">You answered correctly at ${score}/${quizData.length} questions</h2>
+        <img class="gif" src="assets/final_test_korgi.gif">
+        <button class="quiz-button" onclick="location.reload()">Reload</button>`;
+        return;
+    }
+
     const currentQuizData = quizData[currentQuiz];
 
     questionElement.innerText = currentQuizData.question;
@@ -70,22 +80,24 @@ function loadQuiz(){
 }
 
 function deselectAnswers() {
-    answerElements.forEach(function(answerEl) {
-      answerEl.checked = false;
+    answerElements.forEach(function (answerEl) {
+        answerEl.checked = false;
     });
-  };
-function getSelected(){
+}
+
+function getSelected() {
     let answer;
 
     answerElements.forEach(answerEl => {
-        if(answerEl.checked){
+        if (answerEl.checked) {
             answer = answerEl.id;
         }
     });
 
     return answer;
 }
-//----------------------------------------------------theme start------------------------------------------------------------------------------
+
+// Theme
 const changeBackgroundBtn = document.getElementById("changeBackgroundBtn");
 const originalBackgroundImage = 'url("assets/fon.jpg")';
 const newBackgroundImage = 'url("assets/fon2.jpg")';
@@ -93,37 +105,38 @@ const originalTimerBlockColor = '#3cff00';
 const originalNumbColor = '#ff0000';
 
 changeBackgroundBtn.addEventListener("click", function() {
-            const body = document.body;
-            const currentBackgroundImage = body.style.backgroundImage;
-            const timerBlocks = document.getElementsByClassName("timer_block");
-            const numbs = document.getElementsByClassName("numb");
+    const body = document.body;
+    const currentBackgroundImage = body.style.backgroundImage;
+    const timerBlocks = document.getElementsByClassName("timer_block");
+    const numbs = document.getElementsByClassName("numb");
 
-            if (currentBackgroundImage === newBackgroundImage) {
-                body.style.backgroundImage = originalBackgroundImage;
-                for (let i = 0; i < timerBlocks.length; i++) {
-                    timerBlocks[i].style.backgroundColor = originalTimerBlockColor;
-                }
-                for (let j = 0; j < numbs.length; j++) {
-                    numbs[j].style.backgroundColor = originalNumbColor;
-                }
-            } else {
-                body.style.backgroundImage = newBackgroundImage;
-                for (let k = 0; k < timerBlocks.length; k++) {
-                    timerBlocks[k].style.backgroundColor = '#00bfff';
-                }
-                for (let l = 0; l < numbs.length; l++) {
-                    numbs[l].style.backgroundColor = '#00bfff';
-                }
-            }
-        });
-//-----------------------------------------------------------------------------------Timer start--------------------------------------------
-let intervalId; 
+    if (currentBackgroundImage === newBackgroundImage) {
+        body.style.backgroundImage = originalBackgroundImage;
+        for (let i = 0; i < timerBlocks.length; i++) {
+            timerBlocks[i].style.backgroundColor = originalTimerBlockColor;
+        }
+        for (let j = 0; j < numbs.length; j++) {
+            numbs[j].style.backgroundColor = originalNumbColor;
+        }
+    } else {
+        body.style.backgroundImage = newBackgroundImage;
+        for (let k = 0; k < timerBlocks.length; k++) {
+            timerBlocks[k].style.backgroundColor = '#00bfff';
+        }
+        for (let l = 0; l < numbs.length; l++) {
+            numbs[l].style.backgroundColor = '#00bfff';
+        }
+    }
+});
+
+// Timer
+let intervalId;
 let duration = 10;
 
-    function startTimer(duration, callback) {
-      const timerElement = document.getElementById('timer');
+function startTimer(duration, callback) {
+    const timerElement = document.getElementById('timer');
 
-      intervalId = setInterval(function() {
+    intervalId = setInterval(function() {
         let minutes = Math.floor(duration / 60);
         let seconds = duration % 60;
 
@@ -131,117 +144,127 @@ let duration = 10;
         timerElement.textContent = timeString;
 
         if (duration <= 0) {
-          clearInterval(intervalId);
-          callback();
+            clearInterval(intervalId);
+            callback();
         }
 
         duration--;
-      }, 1000);
-    }
+    }, 1000);
+}
 
-    function timerCallback() {
-        var result = confirm("Time over");
-        if (result == true) {
-            duration = 0; 
+function timerCallback() {
+    var result = confirm("Time over");
+    if (result == true) {
+        duration = 0;
+    } else {
+        location.reload();
+    }
+}
+
+function restartTimer() {
+    clearInterval(intervalId);
+    duration = 10;
+    startTimer(duration, timerCallback);
+}
+
+window.onload = function() {
+    startTimer(duration, timerCallback);
+};
+
+function stopTimer() {
+    var timerElement = document.getElementById('timer');
+    timerElement.textContent = '';
+    clearInterval(intervalId);
+}
+
+// Local Storage
+function saveScore(answer) {
+    const currentQuizData = quizData[currentQuiz];
+    if (currentQuizData) {
+        const question = currentQuizData.question;
+
+        let savedScores = localStorage.getItem("scores");
+        if (!savedScores) {
+            savedScores = [];
+        } else {
+            savedScores = JSON.parse(savedScores);
         }
-        else{
-            location.reload();
+
+        const scoreData = {
+            question: question,
+            answer: answer
+        };
+
+        savedScores[currentQuiz] = scoreData; 
+
+        localStorage.setItem("scores", JSON.stringify(savedScores));
+    }
+}
+
+function displayScores() {
+    const savedScores = localStorage.getItem("scores");
+    if (savedScores) {
+        const scores = JSON.parse(savedScores);
+
+        const scoreList = document.getElementById("scoreList");
+        scoreList.innerHTML = "";
+
+        scores.forEach(function (score, index) {
+            if (index < currentQuiz) { 
+                const listItem = document.createElement("li");
+                listItem.innerText = "Question: " + score.question + " - Answer: " + score.answer;
+                scoreList.appendChild(listItem);
+            }
+        });
+    }
+}
+
+function getSelectedAnswer(currentQuizData) {
+    let selectedAnswer = "";
+
+    answerElements.forEach(function (answerEl) {
+        if (answerEl.checked) {
+            if (answerEl.id === "a_answer") {
+                selectedAnswer = currentQuizData.a;
+            } else if (answerEl.id === "b_answer") {
+                selectedAnswer = currentQuizData.b;
+            } else if (answerEl.id === "c_answer") {
+                selectedAnswer = currentQuizData.c;
+            }
         }
-    }
+    });
 
-    function restartTimer() {
-      clearInterval(intervalId);
-      duration = 10;
-      startTimer(duration, timerCallback);
-      
-    }
-
-    window.onload = function() {
-      startTimer(duration, timerCallback);
-    };
-
-    function stopTimer() {
-        var timerElement = document.getElementById('timer');
-      timerElement.textContent = '';
-        clearInterval(intervalId);
-      }
-//----------------------------------------------------------local storage start---------------
-function saveScore() {
-  
-  var currentDate = new Date();
-  var scoreValue = score;
-
-  var newScore = {
-      score: scoreValue,
-      date: currentDate.toLocaleString()
-  };
-
-  var savedScores = localStorage.getItem("scores");
-  if (savedScores) {
-      savedScores = JSON.parse(savedScores);
-      savedScores.push(newScore); 
-      if (savedScores.length > 5) {
-          savedScores = savedScores.slice(-5); 
-      }
-  } else {
-      savedScores = [newScore]; 
-  }
-
-  
-  localStorage.setItem("scores", JSON.stringify(savedScores));
-
- 
-  displayScores(savedScores);
+    return selectedAnswer;
 }
 
 
-function displayScores(scores) {
-  var scoreList = document.getElementById("scoreList");
-  scoreList.innerHTML = "";
 
-  scores.forEach(function(score) {
-      var listItem = document.createElement("li");
-      listItem.innerText = score.score + " - " + score.date;
-      scoreList.appendChild(listItem);
-  });
-}
-//----------------------------------------------------------local storage end---------------
 submit.addEventListener('click', () => {
     const answer = getSelected();
-    
-    if(answer){
-        
-            if(answer === quizData[currentQuiz].correct){
-            if(duration <= 0){
+
+    if (answer) {
+        const currentQuizData = quizData[currentQuiz];
+
+        if (currentQuizData && answer === currentQuizData.correct) {
+            if (duration <= 0) {
                 score = score;
-            }
-            else{
+            } else {
                 score++;
             }
-            }   
+        }
+
         
-        
+        saveScore(answer);
+
         currentQuiz++;
 
         restartTimer();
+
+        loadQuiz();
+
+        counterElement.textContent = currentQuiz ;
+
         
-        if(currentQuiz < quizData.length){
-            loadQuiz();
-        }
-        else{
-            stopTimer()
-            saveScore()
-            currentQuiz--;
-            var savedScores = localStorage.getItem("scores");
-        if (savedScores) {
-            savedScores = JSON.parse(savedScores);
-            displayScores(savedScores);
-        }
-            quiz.innerHTML = `<h2 class="after_quiz">You answered coreectly at ${score}/${quizData.length} questions</h2>
-            <img clas="gif" src="assets/final_test_korgi.gif">
-            <button class="quiz-button" onclick="location.reload()">Reload</button>
-            `;
-        }
-        counterElement.textContent = currentQuiz + 1;
+        displayScores();
     }
 });
