@@ -276,7 +276,7 @@ submit.addEventListener('click', () => {
 
         loadQuiz();
 
-        counterElement.textContent = currentQuiz;
+        counterElement.textContent = currentQuiz + 1;
 
         displayScores();
     }
