@@ -213,8 +213,7 @@ function displayScores() {
     if (savedScores) {
         const scores = JSON.parse(savedScores);
 
-        scoreList.innerHTML = ""; // Очистить список перед отображением
-
+        scoreList.innerHTML = ""; 
         scores.forEach(function (score) {
             const listItem = document.createElement("li");
             listItem.innerText = "Question: " + score.question + " - Answer: " + score.answer;
