@@ -53,21 +53,22 @@ const submit = document.getElementById('submit');
 const counterElement = document.getElementById('counter');
 const scoreList = document.getElementById('scoreList');
 
-let currentQuiz = 0;
-let score = 0;
+let currentQuiz = parseInt(localStorage.getItem('currentQuiz'));
+let score = parseInt(localStorage.getItem('score')) || 0;
 
 loadQuiz();
 
 function loadQuiz() {
     deselectAnswers();
 
-    if (currentQuiz >= quizData.length) {
+    if (currentQuiz === null || currentQuiz >= quizData.length) {
+        currentQuiz = 0;
         stopTimer();
         saveScore();
         displayScores();
         quiz.innerHTML = `<h2 class="after_quiz">You answered correctly at ${score}/${quizData.length} questions</h2>
         <img class="gif" src="assets/final_test_korgi.gif">
-        <button class="quiz-button" onclick="location.reload()">Reload</button>`;
+        <button class="quiz-button" onclick="resetQuiz()">Reload</button>`;
         return;
     }
 
@@ -77,6 +78,12 @@ function loadQuiz() {
     a_answer.innerText = currentQuizData.a;
     b_answer.innerText = currentQuizData.b;
     c_answer.innerText = currentQuizData.c;
+
+    const savedAnswer = getSavedAnswer(currentQuizData);
+    if (savedAnswer) {
+        const selectedAnswer = document.getElementById(savedAnswer);
+        selectedAnswer.checked = true;
+    }
 }
 
 function deselectAnswers() {
@@ -118,6 +125,9 @@ changeBackgroundBtn.addEventListener("click", function() {
         for (let j = 0; j < numbs.length; j++) {
             numbs[j].style.backgroundColor = originalNumbColor;
         }
+        localStorage.setItem("backgroundImage", originalBackgroundImage);
+        localStorage.setItem("timerBlockColor", originalTimerBlockColor);
+        localStorage.setItem("numbColor", originalNumbColor);
     } else {
         body.style.backgroundImage = newBackgroundImage;
         for (let k = 0; k < timerBlocks.length; k++) {
@@ -126,9 +136,11 @@ changeBackgroundBtn.addEventListener("click", function() {
         for (let l = 0; l < numbs.length; l++) {
             numbs[l].style.backgroundColor = '#00bfff';
         }
+        localStorage.setItem("backgroundImage", newBackgroundImage);
+        localStorage.setItem("timerBlockColor", '#00bfff');
+        localStorage.setItem("numbColor", '#00bfff');
     }
 });
-
 // Timer
 let intervalId;
 let duration = 10;
@@ -153,7 +165,7 @@ function startTimer(duration, callback) {
 }
 
 function timerCallback() {
-    var result = confirm("Time over");
+    const result = confirm("Time over");
     if (result == true) {
         duration = 0;
     } else {
@@ -180,16 +192,11 @@ function stopTimer() {
 // Local Storage
 function saveScore(answer) {
     const currentQuizData = quizData[currentQuiz];
+    
     if (currentQuizData) {
         const question = currentQuizData.question;
 
-        let savedScores = localStorage.getItem("scores");
-        if (!savedScores) {
-            savedScores = [];
-        } else {
-            savedScores = JSON.parse(savedScores);
-        }
-
+        let savedScores = JSON.parse(localStorage.getItem("scores")) || [];
         const scoreData = {
             question: question,
             answer: answer
@@ -206,18 +213,27 @@ function displayScores() {
     if (savedScores) {
         const scores = JSON.parse(savedScores);
 
-        const scoreList = document.getElementById("scoreList");
-        scoreList.innerHTML = "";
+        scoreList.innerHTML = ""; // Очистить список перед отображением
 
-        scores.forEach(function (score, index) {
-            if (index < currentQuiz) { 
-                const listItem = document.createElement("li");
-                listItem.innerText = "Question: " + score.question + " - Answer: " + score.answer;
-                scoreList.appendChild(listItem);
-            }
+        scores.forEach(function (score) {
+            const listItem = document.createElement("li");
+            listItem.innerText = "Question: " + score.question + " - Answer: " + score.answer;
+            scoreList.appendChild(listItem);
         });
     }
 }
+function getSavedAnswer(currentQuizData) {
+    const savedScores = localStorage.getItem('scores');
+    if (savedScores) {
+        const scores = JSON.parse(savedScores);
+        const scoreData = scores[currentQuiz];
+        if (scoreData && scoreData.question === currentQuizData.question) {
+            return scoreData.answer;
+        }
+    }
+    return null;
+}
+    
 
 function getSelectedAnswer(currentQuizData) {
     let selectedAnswer = "";
@@ -253,7 +269,6 @@ submit.addEventListener('click', () => {
             }
         }
 
-        
         saveScore(answer);
 
         currentQuiz++;
@@ -262,9 +277,50 @@ submit.addEventListener('click', () => {
 
         loadQuiz();
 
-        counterElement.textContent = currentQuiz ;
+        counterElement.textContent = currentQuiz;
 
-        
         displayScores();
     }
 });
+
+window.onbeforeunload = function () {
+    localStorage.setItem('currentQuiz', currentQuiz);
+    localStorage.setItem('score', score); 
+};
+
+function resetQuiz() {
+    localStorage.removeItem('currentQuiz');
+    localStorage.removeItem('score');
+    localStorage.removeItem('scores');
+    score = 0; 
+    location.reload();
+}
+
+window.onload = function() {
+    startTimer(duration, timerCallback);
+    restoreBackgroundState();
+};
+
+function restoreBackgroundState() {
+    const body = document.body;
+    const savedBackgroundImage = localStorage.getItem("backgroundImage");
+    const savedTimerBlockColor = localStorage.getItem("timerBlockColor");
+    const savedNumbColor = localStorage.getItem("numbColor");
+
+    if (savedBackgroundImage) {
+        body.style.backgroundImage = savedBackgroundImage;
+    }
+    if (savedTimerBlockColor) {
+        const timerBlocks = document.getElementsByClassName("timer_block");
+        for (let i = 0; i < timerBlocks.length; i++) {
+            timerBlocks[i].style.backgroundColor = savedTimerBlockColor;
+        }
+    }
+    if (savedNumbColor) {
+        const numbs = document.getElementsByClassName("numb");
+        for (let i = 0; i < numbs.length; i++) {
+            numbs[i].style.backgroundColor = savedNumbColor;
+        }
+    }
+}
+
