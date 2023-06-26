@@ -1,249 +1,196 @@
 body{
-    background-image: url("assets/fon.jpg");
-    background-repeat: no-repeat; 
-    background-size: cover;
+  background-image: url("assets/fon.jpg");
+  background-repeat: no-repeat; 
+  background-size: cover;
 }
 /*--------------------------------------- text and timer------------------------*/
 .numb{
-    background-color: #ff0000; 
-    border-radius: 10px; 
-    width: 10%; 
-    height: 80px; 
-    opacity: 0.8;
-    text-align: center;
-    margin-bottom: 20px;
+  background-color: #ff0000; 
+  border-radius: 10px; 
+  width: 20%; 
+  height: 80px; 
+  opacity: 0.8;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .text {
-    display: inline-block; 
-    color: white; 
-    font-family: "Obelix Pro", sans-serif; 
-    font-size: 200%;
-    margin-bottom: 10px; 
-  }
-  
-  #counter {
-    display: inline-block; 
-    color: white; 
-    font-family: "Obelix Pro", sans-serif; 
-    font-size: 200%;
-  }
-
-  .timer_block{
-    background-color: #3cff00; 
-    border-radius: 10px; 
-    width: 10%; 
-    height: 100px; 
-    opacity: 0.8;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-.timer_text {
   display: inline-block; 
   color: white; 
   font-family: "Obelix Pro", sans-serif; 
   font-size: 200%;
   margin-bottom: 10px; 
-  }
+}
 
-#timer {
+#counter {
   display: inline-block; 
   color: white; 
   font-family: "Obelix Pro", sans-serif; 
-  font-size: 180%;
+  font-size: 200%;
+}
+
+.timer_block{
+  background-color: #3cff00; 
+  border-radius: 10px; 
+  width: 20%; 
+  height: 100px; 
+  opacity: 0.8;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.timer_text {
+display: inline-block; 
+color: white; 
+font-family: "Obelix Pro", sans-serif; 
+font-size: 200%;
+margin-bottom: 10px; 
+}
+
+#timer {
+display: inline-block; 
+color: white; 
+font-family: "Obelix Pro", sans-serif; 
+font-size: 180%;
 }
 
 
 /*---------------------------------Score------------------------------------*/
 
 .score{
-  background-color: hsl(52, 98%, 48%); 
-  border-radius: 10px; 
-  width: 20%; 
-  height: 620px; 
-  opacity: 0.8;
-  margin-bottom: 20px;
+background-color: hsl(52, 98%, 48%); 
+border-radius: 10px; 
+width: 20%; 
+height: 540px; 
+opacity: 0.8;
+margin-bottom: 10px;
 }
 
 #scoreList{
-  display: inline-block; 
-  color: rgb(0, 0, 0); 
-  font-family: "roboto", 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  line-height: 0.8;
-  font-size: 10px;
+display: inline-block; 
+color: rgb(0, 0, 0); 
+font-family: "roboto", 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+line-height: 0.8;
+font-size: 5px;
 }
 .score ul li {
-  font-size: 25px; 
+font-size: 17px; 
+margin-bottom: 20px;
 }
 
 .corgi{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .corgi img{
-  max-width: 120%;
-  max-height: 120%;
+max-width: 120%;
+max-height: 120%;
 }
 
 
 /*-------------------------------------------------------------------------*/
 .quiz-box {
-    background-color: #00bfff; 
-    border-radius: 10px; 
-    width: 30%; 
-    height: 400px; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    opacity: 0.9;
-    
-  }
-
-  #question{
-    text-align: center;  
-    color: white;  
-    font-family: "Obelix Pro", sans-serif;  
-    font-size: 200%;
-  }
-  /*----------------------------------butons-------------------------------------------*/
-  .button-container {
-    position: fixed;
-    top: 350px;
-    left: 20px;
+  background-color: #00bfff; 
+  border-radius: 10px; 
+  width: 35%; 
+  height: 400px; 
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  opacity: 0.9;
+  
 }
 
-.button-container button {
-    padding: 10px 107px;
-    font-size: 19px;
-    background-color: #fbff00;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: "Obelix Pro", sans-serif;  
-}
- 
-#changeBackgroundBtn:hover{
-  background-color: #87cefa;  
+#question{
+  text-align: center;  
   color: white;  
+  font-family: "Obelix Pro", sans-serif;  
+  font-size: 180%;
 }
-#submit:hover {
-  background-color: #87cefa;  
-  color: white;  
-}
-#changeBackgroundBtn:active{
-  background-color: #00008b;  
-  color: white;  
-}
+/*----------------------------------butons-------------------------------------------*/
+
 #submit:active {
-  background-color: #00008b;  
-  color: white;  
+background-color: #00008b;  
+color: white;  
 }
 
 ul{
-    top: 90%;  
-    left: 50%;
-    
-    color: white;  
-    font-family: "Obelix Pro", sans-serif;  
-    font-size: 150%;
-    display: grid;  
-    margin: 40px;  
-    padding: 0;  
-    list-style-type: none;
+  top: 90%;  
+  left: 50%;
+  
+  color: white;  
+  font-family: "Obelix Pro", sans-serif;  
+  font-size: 150%;
+  display: grid;  
+  margin: 40px;  
+  padding: 0;  
+  list-style-type: none;
 }
 
 li {
-    margin-bottom: 40px;
-    list-style-type: disc;
-    font-size: 30px;
-    list-style-type: none;  
-    position: relative;  
-    padding-left: 20px;  
-    
-  }
+  margin-bottom: 40px;
+  list-style-type: disc;
+  font-size: 30px;
+  list-style-type: none;  
+  position: relative;  
+  padding-left: 20px;  
   
-  .custom-option {
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-  }
-  
-  .custom-option:hover {
-    background-color: lightblue;
-    cursor: pointer;
-  }
+}
+
+.custom-option {
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.custom-option:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
 
 .after_quiz{
-    text-align: center;  
-    color: white;  
-    font-family: "Obelix Pro", sans-serif;  
-    font-size: 200%;
+  text-align: center;  
+  color: white;  
+  font-family: "Obelix Pro", sans-serif;  
+  font-size: 200%;
 }
 
 
 
-.quiz-button{
-    position: absolute;  
-    top: 90%;  
-    left: 50%;  
-    transform: translate(-50%, -50%);  
-    width: 30%;  
-    height: 40px;  
-    border-radius: 10px;  
-    font-family: "Obelix Pro", sans-serif;
-    font-size: 100%;
-    background-color: #eef14c;  
-    color: rgb(0, 0, 0);  
-    padding: 10px 20px;  
-    border: none;  
-    border-radius: 5px;  
-    transition: background-color 0.3s, color 0.3s; 
+
+.gif{
+  top: 90%;  
+  left: 50%;
+  display: grid;  
+  margin: 20px;  
+  padding: 0;  
 }
 
-.quiz-button:hover {
-    background-color: #87cefa; 
-    color: white;  
-  }
-  
-  .quiz-button:active {
-    background-color: #00008b;  
-    color: white;  
-  }
 
-  .gif{
-    top: 90%;  
-    left: 50%;
-    display: grid;  
-    margin: 20px;  
-    padding: 0;  
-  }
-  
+.answer {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 1;  
+}
 
-  .answer {
-    opacity: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    z-index: 1;  
-  }
-  
-  label {
-    display: block;
-    padding: 2px;  
-  }
-  
-  .answer:checked + label {
-    font-weight: bold;
-    color: black;
-  }
+label {
+  display: block;
+  padding: 2px;  
+}
+
+.answer:checked + label {
+  font-weight: bold;
+  color: black;
+}
 
 
 @media only screen and (max-width: 800px) {
@@ -254,53 +201,157 @@ li {
     height: auto;
     margin-bottom: 20px;
   }
+
   .score {
     margin-top: 20px;
   }
+
   .quiz-box {
-    width: 100%;
-    max-width: 400px;
+    width: 98vw;
     height: auto;
-    position: static;
+    position: relative;
     margin: 0 auto;
-    transform: none;
+    transform: translateX(-50%);
+    left: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    overflow-y: auto;
+    z-index: 1;
   }
 
-  .button-container {
-        top: auto;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        position: relative;
-       
-    }
+  .quiz-box .button-container {
+    width: 60%;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
 
-  
-  .button-container button {
+  .quiz-box .button-container button {
     width: 100%;
     padding: 10px;
-    font-size: 16px; 
-    margin-bottom: 8px
+    font-size: 16px;
+    margin-bottom: 8px;
   }
 
-  .quiz-button{
+  .quiz-box .quiz-button {
     width: 100%;
     padding: 10px;
-    font-size: 16px; 
-    top: auto;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        position: relative;
+    font-size: 16px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
+ 
 }
 
 
 
+/*----------------------------------toogle and button----------*/
+
+
+.quiz-button{
+  position: absolute;  
+  top: 90%;  
+  left: 50%;  
+  transform: translate(-50%, -50%);  
+  width: 30%;  
+  height: 40px;  
+  border-radius: 10px;  
+  font-family: "Obelix Pro", sans-serif;
+  font-size: 100%;
+  background-color: #eef14c;  
+  color: rgb(0, 0, 0);  
+  padding: 10px 20px;  
+  border: none;  
+  border-radius: 5px;  
+  transition: background-color 0.3s, color 0.3s; 
+}
+
+.quiz-button:hover {
+  background-color: #87cefa; 
+  color: white;  
+}
+
+.quiz-button:active {
+  background-color: #00008b;  
+  color: white;  
+}
+
+.button-container {
+  position: fixed;
+  top: 350px;
+  left: 80px;
+}
+
+.button-container label {
+  width: 46px;
+  height: 17px;
+  position: relative;
+  display: inline-block;
+  background: #ebebeb;
+  border-radius: 50px;
+  box-shadow: inset 0px 2px 6px rgba(0,0,0,0.4), inset 0px -2px 6px rgba(255,255,255,0.4);
+  cursor: pointer;
+}
+
+.button-container label:after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  background: linear-gradient(180deg,#777,#007bff);
+  border-radius: 50px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+}
+
+.button-container input {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.button-container input:checked + label {
+  background: #ffffff;
+}
+
+.button-container input:checked + label:after {
+  left: 49px;
+  transform: translateX(-100%);
+  background: linear-gradient(180deg,#ffcc89,#d8860b);
+}
+
+.button-container label, label:after {
+  transition: 0.3s;
+}
+
+.button-container label:active:after {
+  width: 26px;
+}
+
+.button-container button {
+  padding: 10px 107px;
+  font-size: 19px;
+  background-color: #fbff00;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Obelix Pro", sans-serif;  
+}
+
+#submit:hover {
+  background-color: #87cefa; 
+  color: white;  
+}
+
+#submit:active {
+  background-color: #00008b;  
+  color: white;  
+}
