@@ -89,7 +89,8 @@ function getSelected() {
           new: '#00bfff'
         }
       };
-      
+      document.addEventListener('DOMContentLoaded', function() {
+      let toggle = document.getElementById('toggle');
       toggle.addEventListener("click", function() {
         if (this.checked) {
           body.style.backgroundImage = colors.background.new;
@@ -130,6 +131,7 @@ function getSelected() {
             toggle.checked = false;
         }
     });
+  }); 
 
 
     // Timer
