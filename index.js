@@ -30,19 +30,24 @@ function loadQuiz() {
         return;
     }
 
-    const currentQuizData = quizData[currentQuiz];
-
-    questionElement.innerText = currentQuizData.question;
-    a_answer.innerText = currentQuizData.a;
-    b_answer.innerText = currentQuizData.b;
-    c_answer.innerText = currentQuizData.c;
-
-    const savedAnswer = getSavedAnswer(currentQuizData);
-    if (savedAnswer) {
-        const selectedAnswer = document.getElementById(savedAnswer);
-        selectedAnswer.checked = true;
+    try {
+        const currentQuizData = quizData[currentQuiz];
+    
+        questionElement.innerText = currentQuizData.question;
+        a_answer.innerText = currentQuizData.a;
+        b_answer.innerText = currentQuizData.b;
+        c_answer.innerText = currentQuizData.c;
+    
+        const savedAnswer = getSavedAnswer(currentQuizData);
+        if (savedAnswer) {
+          const selectedAnswer = document.getElementById(savedAnswer);
+          selectedAnswer.checked = true;
+        }
+      } catch (error) {
+        console.error('An error occurred while loading the quiz:', error);
+        
+      }
     }
-}
 
 function deselectAnswers() {
     answerElements.forEach(function (answerEl) {
@@ -177,36 +182,44 @@ function getSelected() {
 
     // Local Storage
     function saveScore(answer) {
-        const currentQuizData = quizData[currentQuiz];
+        try {
+            const currentQuizData = quizData[currentQuiz];
         
-        if (currentQuizData) {
-            const question = currentQuizData.question;
-
-            let savedScores = JSON.parse(localStorage.getItem("scores")) || [];
-            const scoreData = {
+            if (currentQuizData) {
+              const question = currentQuizData.question;
+        
+              let savedScores = JSON.parse(localStorage.getItem('scores')) || [];
+              const scoreData = {
                 question: question,
-                answer: answer
-            };
-
-            savedScores[currentQuiz] = scoreData; 
-
-            localStorage.setItem("scores", JSON.stringify(savedScores));
+                answer: answer,
+              };
+        
+              savedScores[currentQuiz] = scoreData;
+        
+              localStorage.setItem('scores', JSON.stringify(savedScores));
+            }
+          } catch (error) {
+            console.error('An error occurred while saving the score:', error);
+          }
         }
-    }
 
     function displayScores() {
-        const savedScores = localStorage.getItem("scores");
-        if (savedScores) {
-            const scores = JSON.parse(savedScores);
-
-            scoreList.innerHTML = ""; 
-            scores.forEach(function (score) {
-                const listItem = document.createElement("li");
-                listItem.innerText = "Question: " + score.question + " - Answer: " + score.answer;
+        try {
+            const savedScores = localStorage.getItem('scores');
+            if (savedScores) {
+              const scores = JSON.parse(savedScores);
+        
+              scoreList.innerHTML = '';
+              scores.forEach(function (score) {
+                const listItem = document.createElement('li');
+                listItem.innerText = 'Question: ' + score.question + ' - Answer: ' + score.answer;
                 scoreList.appendChild(listItem);
-            });
+              });
+            }
+          } catch (error) {
+            console.error('An error occurred while displaying scores:', error);
+          }
         }
-    }
     function getSavedAnswer(currentQuizData) {
         const savedScores = localStorage.getItem('scores');
         if (savedScores) {
@@ -240,33 +253,40 @@ function getSelected() {
 
 
 
-    submit.addEventListener('click', () => {
-        const answer = getSelected();
-
-        if (answer) {
-            const currentQuizData = quizData[currentQuiz];
-
-            if (currentQuizData && answer === currentQuizData.correct) {
-                if (duration <= 0) {
+        submit.addEventListener('click', () => {
+            try {
+              const answer = getSelected();
+          
+              if (answer) {
+                const currentQuizData = quizData[currentQuiz];
+          
+                if (currentQuizData && answer === currentQuizData.correct) {
+                  if (duration <= 0) {
                     score = score;
-                } else {
+                  } else {
                     score++;
+                  }
                 }
+          
+                saveScore(answer);
+          
+                currentQuiz++;
+          
+                restartTimer();
+          
+                loadQuiz();
+          
+                counterElement.textContent = currentQuiz + 1;
+          
+                displayScores();
+              }
+            } catch (error) {
+              console.error('An error occurred while processing the answer:', error);
+              
             }
+          });
 
-            saveScore(answer);
 
-            currentQuiz++;
-
-            restartTimer();
-
-            loadQuiz();
-
-            counterElement.textContent = currentQuiz + 1; 
-
-            displayScores();
-        }
-    });
     window.onbeforeunload = function () {
         localStorage.setItem('currentQuiz', currentQuiz);
         localStorage.setItem('score', score); 
