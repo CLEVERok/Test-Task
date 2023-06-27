@@ -94,7 +94,7 @@ max-height: 120%;
 .quiz-box {
   background-color: #00bfff; 
   border-radius: 10px; 
-  width: 35%; 
+  width: 40%; 
   height: 400px; 
   position: absolute; 
   top: 50%; 
@@ -192,8 +192,15 @@ label {
   color: black;
 }
 
-
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1200px) {
+  .quiz-box {
+    width: 500px; 
+    height: 400px; 
+    
+    
+  }
+}
+@media only screen and (max-width: 950px) {
   .numb,
   .timer_block,
   .score {
