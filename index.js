@@ -12,17 +12,17 @@
 
     let currentQuiz = parseInt(localStorage.getItem('currentQuiz'));
     let score = parseInt(localStorage.getItem('score')) || 0;
-
+    let intervalId;
     loadQuiz();
 
 function loadQuiz() {
     deselectAnswers();
 
-    if (currentQuiz === null || currentQuiz >= quizData.length) {
-        currentQuiz = 0;
-        stopTimer();
-        saveScore();
-        displayScores();
+    if (isNaN(currentQuiz) || currentQuiz >= quizData.length) {
+      currentQuiz = 0;
+      stopTimer();
+      saveScore();
+      displayScores();
         
         quiz.innerHTML = `<h2 class="after_quiz">You answered correctly at ${score}/${quizData.length} questions</h2>
         <img class="gif" src="assets/final_test_korgi.gif">
@@ -133,7 +133,7 @@ function getSelected() {
 
 
     // Timer
-    let intervalId;
+    
     let duration = 10;
 
     function startTimer(duration, callback) {
@@ -175,9 +175,9 @@ function getSelected() {
     };
 
     function stopTimer() {
-        const timerElement = document.getElementById('timer');
-        timerElement.textContent = '';
-        clearInterval(intervalId);
+      const timerElement = document.getElementById('timer');
+      timerElement.textContent = '';
+      clearInterval(intervalId);
     }
 
     // Local Storage
