@@ -1,70 +1,88 @@
-
-
-    const quiz = document.getElementById('quiz');
-    const answerElements = document.querySelectorAll('.answer');
-    const questionElement = document.getElementById('question');
-    const a_answer = document.getElementById('a_answer');
-    const b_answer = document.getElementById('b_answer');
-    const c_answer = document.getElementById('c_answer');
-    const submit = document.getElementById('submit');
-    const counterElement = document.getElementById('counter');
-    const scoreList = document.getElementById('scoreList');
-
-    let currentQuiz = parseInt(localStorage.getItem('currentQuiz'));
-    let score = parseInt(localStorage.getItem('score')) || 0;
-    let intervalId;
-    loadQuiz();
+const quiz = document.getElementById('quiz');
+const questionElement = document.getElementById('question');
+const answerContainer = document.getElementById('answer-container');
+const submit = document.getElementById('submit');
+const counterElement = document.getElementById('counter');
+const scoreList = document.getElementById('scoreList');
+const imagePath = 'assets/final_test_korgi.gif';
+let currentQuiz = parseInt(localStorage.getItem('currentQuiz'));
+let score = parseInt(localStorage.getItem('score')) || 0;
+let intervalId;
+loadQuiz();
 
 function loadQuiz() {
-    deselectAnswers();
+  deselectAnswers();
 
-    if (isNaN(currentQuiz) || currentQuiz >= quizData.length) {
-      currentQuiz = 0;
-      stopTimer();
-      saveScore();
-      displayScores();
-        
-        quiz.innerHTML = `<h2 class="after_quiz">You answered correctly at ${score}/${quizData.length} questions</h2>
-        <img class="gif" src="assets/final_test_korgi.gif">
-        <button class="quiz-button" onclick="resetQuiz()">Reload</button>`;
-        return;
-    }
+  if (isNaN(currentQuiz) || currentQuiz >= quizData.length) {
+    currentQuiz = 0;
+    stopTimer();
+    saveScore();
+    displayScores();
 
-    try {
-        const currentQuizData = quizData[currentQuiz];
-    
-        questionElement.innerText = currentQuizData.question;
-        a_answer.innerText = currentQuizData.a;
-        b_answer.innerText = currentQuizData.b;
-        c_answer.innerText = currentQuizData.c;
-    
-        const savedAnswer = getSavedAnswer(currentQuizData);
-        if (savedAnswer) {
-          const selectedAnswer = document.getElementById(savedAnswer);
-          selectedAnswer.checked = true;
-        }
-      } catch (error) {
-        console.error('An error occurred while loading the quiz:', error);
-        
-      }
+    quiz.innerHTML = `<h2 class="after_quiz">You answered correctly at ${score}/${quizData.length} questions</h2>
+    <img class="gif" src="${imagePath}">
+    <button class="quiz-button" onclick="resetQuiz()">Reload</button>`;
+    return;
+  }
+
+  try {
+    const currentQuizData = quizData[currentQuiz];
+
+    questionElement.innerText = currentQuizData.question;
+    createAnswerOptions(currentQuizData);
+
+    const savedAnswer = getSavedAnswer(currentQuizData);
+    if (savedAnswer) {
+      const selectedAnswer = document.getElementById(savedAnswer);
+      selectedAnswer.checked = true;
     }
+  } catch (error) {
+    console.error('An error occurred while loading the quiz:', error);
+  }
+}
 
 function deselectAnswers() {
-    answerElements.forEach(function (answerEl) {
-        answerEl.checked = false;
-    });
+  const answerElements = answerContainer.querySelectorAll('.answer');
+  answerElements.forEach(function (answerEl) {
+    answerEl.checked = false;
+  });
+}
+
+function createAnswerOptions(currentQuizData) {
+  answerContainer.innerHTML = '';
+  const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+
+  for (let i = 0; i < letters.length; i++) {
+    const answerLetter = letters[i];
+    const answerOption = currentQuizData[answerLetter];
+    if (answerOption) {
+      const li = document.createElement('li');
+      li.className = 'custom-option';
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'answer';
+      input.id = answerLetter;
+      input.className = 'answer';
+      const label = document.createElement('label');
+      label.htmlFor = answerLetter;
+      label.innerText = answerOption;
+
+      li.appendChild(input);
+      li.appendChild(label);
+      answerContainer.appendChild(li);
+    }
+  }
 }
 
 function getSelected() {
-    let answer;
-
-    answerElements.forEach(answerEl => {
-        if (answerEl.checked) {
-            answer = answerEl.id;
-        }
-    });
-
-    return answer;
+  const answerElements = answerContainer.querySelectorAll('.answer');
+  let selectedAnswer = null;
+  answerElements.forEach(function (answerEl) {
+    if (answerEl.checked) {
+      selectedAnswer = answerEl.id;
+    }
+  });
+  return selectedAnswer;
 }
 
     // Theme
