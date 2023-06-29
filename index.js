@@ -1,10 +1,11 @@
+
 const quiz = document.getElementById('quiz');
 const questionElement = document.getElementById('question');
 const answerContainer = document.getElementById('answer-container');
 const submit = document.getElementById('submit');
 const counterElement = document.getElementById('counter');
 const scoreList = document.getElementById('scoreList');
-const imagePath = 'assets/final_test_korgi.gif';
+
 let currentQuiz = parseInt(localStorage.getItem('currentQuiz'));
 let score = parseInt(localStorage.getItem('score')) || 0;
 let intervalId;
@@ -20,7 +21,7 @@ function loadQuiz() {
     displayScores();
 
     quiz.innerHTML = `<h2 class="after_quiz">You answered correctly at ${score}/${quizData.length} questions</h2>
-    <img class="gif" src="${imagePath}">
+    <div class="gif"></div>
     <button class="quiz-button" onclick="resetQuiz()">Reload</button>`;
     return;
   }

@@ -163,11 +163,14 @@ li {
 
 
 .gif{
-  top: 90%;  
-  left: 50%;
-  display: grid;  
-  margin: 20px;  
-  padding: 0;  
+  margin: auto;
+  background-image: url(./assets/final_test_korgi.gif);
+  width: 370px;
+  height: 270px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transform: scale(0.6)
 }
 
 
@@ -293,7 +296,7 @@ label {
 .button-container {
   position: fixed;
   top: 350px;
-  left: 80px;
+  left: 140px;
 }
 
 .button-container label {
